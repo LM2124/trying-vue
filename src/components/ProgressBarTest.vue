@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import ProgressBar from './ProgressBar.vue'
 
-const pickedProgress = ref(0)
+const pickedProgress = ref(20)
 const pickedSmoothing = ref(0.5)
 </script>
 
@@ -19,7 +19,7 @@ const pickedSmoothing = ref(0.5)
     Change Smoothing:
     <template v-for="opt in [0, 0.25, 0.5, 0.75, 1.0, 2.0]" :key="opt">
       <input type="radio" :id="opt.toString()" :value="opt" v-model="pickedSmoothing" />
-      <label :for="opt.toString()">{{ opt + ' ' }}<nbsp /></label>
+      <label :for="opt.toString()">{{ opt + ' ' }}</label>
     </template>
   </p>
 </template>

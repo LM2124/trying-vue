@@ -23,6 +23,9 @@ const sortSelection = ref('')
       <template v-if="fakeWorkers.filter((x) => x.status == 'Failed').length">
         - {{ fakeWorkers.filter((x) => x.status == 'Finished').length }} Failed
       </template>
+      <!-- Todo: Quero imitar os botões de filtragem e sort do Github -->
+      <!-- Deve envolver Modals, provavelmente? -->
+      <!-- https://vuejs.org/guide/built-ins/teleport.html#basic-usage -->
       | Sort by:
       <select v-model="sortSelection">
         <option>Name</option>
