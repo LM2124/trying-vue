@@ -1,14 +1,24 @@
 <script setup lang="ts">
 import type Worker from '@/types/Worker'
-import { ref } from 'vue'
+import { provide, ref, type Ref } from 'vue'
 import ProgressBarTest from './ProgressBarTest.vue'
 import WorkerItem from './WorkerItem.vue'
 
-const fakeWorkers: Worker[] = [
+const fakeWorkers: Ref<Worker[]> = ref([
   { filename: 'notTheBees.mp4', progress: 100, status: 'Finished' },
   { filename: 'test.mp4', progress: 40, status: 'Running' },
-  { filename: 'bushhidthefacts.mp4', progress: 0, status: 'Failed' },
-]
+  { filename: 'bushhidthefacts.mp4', progress: 10, status: 'Failed' },
+])
+
+// Using Provide/Inject so I can avoid bubbling up events
+// from WorkerButtons to WorkerItem to MainDashboard.
+function updateWorker(worker: Worker, obj: Partial<Worker>) {
+  // Since the Workers are fake for now, this is perfectly fine
+  Object.assign(worker, obj)
+  // If the objects were always correctly passed by
+  // reference, the reactivity should 'just work™'
+}
+provide('updateWorker', updateWorker)
 
 const sortSelection = ref('')
 </script>
@@ -34,9 +44,9 @@ const sortSelection = ref('')
         <option>Time Finished</option>
       </select>
     </header>
-    <ul>
-      <WorkerItem v-for="worker in fakeWorkers" :key="worker.filename" :worker="worker" />
-    </ul>
+    <!-- <ul> -->
+    <WorkerItem v-for="worker in fakeWorkers" :key="worker.filename" :worker="worker" />
+    <!-- </ul> -->
     <ProgressBarTest />
   </main>
 </template>

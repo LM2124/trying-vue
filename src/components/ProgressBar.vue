@@ -5,23 +5,24 @@ import { reactive, watchEffect } from 'vue'
 interface Props {
   progress: number
   smoothingSeconds?: number
+  color?: string
 }
-const { progress = 0, smoothingSeconds = 0.5 } = defineProps<Props>()
+const { progress = 0, smoothingSeconds = 0.5, color = 'green' } = defineProps<Props>()
 
 // https://vuejs.org/guide/extras/animation#animating-with-watchers
 const tweened = reactive({
-  number: 0,
+  number: progress,
 })
 
 watchEffect(() => {
-  gsap.to(tweened, { number: progress || 0, duration: smoothingSeconds })
+  gsap.to(tweened, { number: progress, duration: smoothingSeconds })
 })
 </script>
 
 <template>
-  <slot :tweenedNumber="tweened.number">
+  <slot :tweenedProgress="tweened.number">
     <div class="bar" style="background-color: gray; overflow: hidden">
-      <div class="bar" style="background-color: green" :style="{ width: tweened.number + '%' }">
+      <div class="bar" :style="{ backgroundColor: color, width: tweened.number + '%' }">
         <span style="padding-inline: 1rem; font-weight: bold">
           {{ tweened.number.toFixed(0) }}%
         </span>
