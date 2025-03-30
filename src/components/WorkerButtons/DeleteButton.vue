@@ -8,16 +8,13 @@ const { worker } = defineProps<{
 }>()
 
 const workerController = inject<FakeWorkerController>('workerController')
+
 // Reminder: https://vuejs.org/guide/components/props.html#one-way-data-flow
-function pauseWorker() {
-  workerController?.updateWorker(worker, { status: 'Idle' })
-}
-function resumeWorker() {
-  workerController?.updateWorker(worker, { status: 'Running' })
+function deleteWorker() {
+  workerController?.removeWorker(worker)
 }
 </script>
 
 <template>
-  <button @click="pauseWorker" title="Pause" v-if="worker.status == 'Running'">P</button>
-  <button @click="resumeWorker" title="Resume" v-else-if="worker.status == 'Idle'">R</button>
+  <button @click="deleteWorker" title="Delete">D</button>
 </template>

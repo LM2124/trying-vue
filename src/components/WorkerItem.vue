@@ -4,6 +4,7 @@ import ProgressBar from './ProgressBar.vue'
 import PauseUnpause from './WorkerButtons/PauseUnpauseButton.vue'
 import { computed } from 'vue'
 import RestartButton from './WorkerButtons/RestartButton.vue'
+import DeleteButton from './WorkerButtons/DeleteButton.vue'
 
 const { worker } = defineProps<{
   worker: Worker
@@ -43,7 +44,7 @@ const barColor = computed(() => {
         {{ worker.status }}
         <PauseUnpause :worker="worker" />
         <RestartButton :worker="worker" />
-        <!-- <button title="Delete">D</button> -->
+        <DeleteButton :worker="worker" />
       </span>
     </div>
     <ProgressBar :progress="worker.progress || 0" :color="barColor"></ProgressBar>
