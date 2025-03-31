@@ -1,3 +1,5 @@
+![Demonstração Rápida](./src/assets/quickDemo.gif)
+
 # .
 
 This template should help get you started developing with Vue 3 in Vite.
