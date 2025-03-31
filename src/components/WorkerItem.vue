@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type Worker from '@/types/Worker'
-import ProgressBar from './ProgressBar.vue'
-import PauseUnpause from './WorkerButtons/PauseUnpauseButton.vue'
 import { computed } from 'vue'
-import RestartButton from './WorkerButtons/RestartButton.vue'
+import ProgressBar from './ProgressBar.vue'
 import DeleteButton from './WorkerButtons/DeleteButton.vue'
+import PauseUnpause from './WorkerButtons/PauseUnpauseButton.vue'
+import RestartButton from './WorkerButtons/RestartButton.vue'
 
 const { worker } = defineProps<{
   worker: Worker
@@ -40,7 +40,10 @@ const barColor = computed(() => {
   >
     <div style="margin-bottom: 0.25rem; display: flex">
       <span style="flex-grow: 1"> {{ worker.filename }} </span>
-      <span style="align-self: flex-end; min-width: max-content">
+      <span
+        style="align-self: flex-end; min-width: max-content"
+        :class="worker.status == 'Failed' ? 'errorText' : ''"
+      >
         {{ worker.status }}
         <PauseUnpause :worker="worker" />
         <RestartButton :worker="worker" />
