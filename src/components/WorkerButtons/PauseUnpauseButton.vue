@@ -2,6 +2,8 @@
 import type FakeWorkerController from '@/controllers/FakeWorkerController'
 import type Worker from '@/types/Worker'
 import { inject } from 'vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 const { worker } = defineProps<{
   worker: Worker
@@ -18,6 +20,10 @@ function resumeWorker() {
 </script>
 
 <template>
-  <button @click="pauseWorker" title="Pause" v-if="worker.status == 'Running'">P</button>
-  <button @click="resumeWorker" title="Resume" v-else-if="worker.status == 'Idle'">R</button>
+  <button @click="pauseWorker" title="Pause" v-if="worker.status == 'Running'">
+    <FontAwesomeIcon :icon="faPause"></FontAwesomeIcon>
+  </button>
+  <button @click="resumeWorker" title="Resume" v-else-if="worker.status == 'Idle'">
+    <FontAwesomeIcon :icon="faPlay"></FontAwesomeIcon>
+  </button>
 </template>

@@ -2,6 +2,8 @@
 import type FakeWorkerController from '@/controllers/FakeWorkerController'
 import type Worker from '@/types/Worker'
 import { inject } from 'vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faRotateLeft } from '@fortawesome/free-solid-svg-icons';
 
 const { worker } = defineProps<{
   worker: Worker
@@ -16,5 +18,7 @@ function restartWorker() {
 </script>
 
 <template>
-  <button @click="restartWorker" title="Restart">R</button>
+  <button @click="restartWorker" title="Restart">
+    <FontAwesomeIcon :icon="faRotateLeft"></FontAwesomeIcon>
+  </button>
 </template>
